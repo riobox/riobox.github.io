@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to riobox.github.io</title>
+    <title>Welcome to my profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,10 +16,39 @@
         p {
             color: #666;
         }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to riobox.github.io</h1>
-    <p>This is a placeholder website. Content will be added soon. Test.</p>
+    <h1>Hello there!</h1>
+    <p>This is a placeholder website. Content will be added soon.</p>
+    <button id="exampleBtn">Example</button>
+    <button id="testBtn" class="hidden">Test</button>
+
+    <script>
+        document.getElementById('exampleBtn').addEventListener('click', function() {
+            var testButton = document.getElementById('testBtn');
+            if (testButton.classList.contains('hidden')) {
+                testButton.classList.remove('hidden');
+            } else {
+                testButton.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
