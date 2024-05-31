@@ -683,49 +683,40 @@
 			<div id="main">
 				<div class="inner">
 					<section id="home-section" class="active" style="">
-						<div id="container12" class="container columns">
-							<div class="wrapper">
-								<div class="inner">
-									<div>
-										<ul id="buttons21" class="buttons">
-											<li style="opacity: 1; transform: none;">
-												<a href="#" class="button n01" onclick="incrementCounter()">
-													<svg aria-labelledby="icon-title">
-														<title id="icon-title">Cookie</title>
-														<use xlink:href="#icon-cookie"></use>
-													</svg>
-													<span class="label">Get a free cookie!</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-									<div>
-										<p id="text11" style="opacity: 1; transform: none;">0 Cookies have been given</p>
-									</div>
-								</div>
-							</div>
-						</div>
 						<script>
-							async function fetchCounter() {
-								try {
-									const response = await fetch('/counter');
-									const data = await response.json();
-									document.getElementById('text11').innerText = data.count + " Cookies have been given";
-								} catch (error) {
-									console.error('Error fetching counter:', error);
-								}
+							var counter = localStorage.getItem('cookieCounter');
+							if (counter === null) {
+								counter = 0;
+							} else {
+								counter = parseInt(counter);
 							}
 							
-							async function incrementCounter() {
-								try {
-									const response = await fetch('/increment', { method: 'POST' });
-									const data = await response.json();
-									document.getElementById('text11').innerText = data.count + " Cookies have been given";
-								} catch (error) {
-									console.error('Error incrementing counter:', error);
-								}
+							document.getElementById('text11').innerText = counter + " Cookies have been given to you";
+							
+							function incrementCounter() {
+								counter++;
+								document.getElementById('text11').innerText = counter + " Cookies have been given to you";
+								localStorage.setItem('cookieCounter', counter);
 							}
-							document.addEventListener('DOMContentLoaded', fetchCounter);
+						</script>
+						<script>
+							function sendNotification() {
+								var xhr = new XMLHttpRequest();
+								xhr.open("POST", "https://discord.com/api/webhooks/1246176704850956418/TAKrbxsr1LiWHNjx8djc-a4NN8WIPJtTmU9aLxDDFy1AgZ5dakxTXitj64FDovMg5w8c", true);
+								xhr.setRequestHeader("Content-Type", "application/json");
+							
+								xhr.onreadystatechange = function () {
+									if (xhr.readyState === 4 && xhr.status === 200) {
+										console.log("Notification sent successfully.");
+									}
+								};
+								
+								var message = {
+									"content": "Someone just got a free cookie!"
+								};
+							
+								xhr.send(JSON.stringify(message));
+							}
 						</script>
 						<div id="container07" class="container columns">
 							<div class="wrapper">
@@ -785,6 +776,29 @@
 												</a>
 											</li>
 										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="container12" class="container columns">
+							<div class="wrapper">
+								<div class="inner">
+									<div>
+										<ul id="buttons21" class="buttons">
+											<li style="opacity: 1; transform: none;">
+												<a class="button n01" onclick="incrementCounter(); sendNotification();" style="cursor: pointer;">
+													<svg aria-labelledby="icon-title">
+														<title id="icon-title">Cookie</title>
+														<use xlink:href="#icon-cookie"></use>
+													</svg>
+													<span class="label">Get a free cookie!</span>
+												</a>
+												
+											</li>
+										</ul>
+									</div>
+									<div>
+										<p id="text11" style="opacity: 1; transform: none;">0 Cookies have been given to you</p>
 									</div>
 								</div>
 							</div>
