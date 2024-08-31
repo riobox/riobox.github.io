@@ -7749,6 +7749,38 @@ p spoiler-text {
 	font-size: 1em;
 }
 
+#text21 {
+	color: rgba(255, 255, 255, 0.969);
+	font-family: 'Kalnia', serif;
+	font-size: 1em;
+	line-height: 1.5;
+	font-weight: bold;
+}
+
+#text21 a {
+	color: rgba(255, 255, 255, 0.039);
+	text-decoration: underline;
+}
+
+#text21 a:hover {
+	text-decoration: none;
+}
+
+#text21 span.p:nth-child(n + 2) {
+	margin-top: 1rem;
+}
+
+#text21 {
+	letter-spacing: 0rem;
+	width: 100%;
+	font-size: 1em;
+	line-height: 1.5;
+}
+
+#text21 {
+	font-size: 1em;
+}
+
 #buttons21 {
 	gap: 0.875rem;
 	flex-direction: row;
